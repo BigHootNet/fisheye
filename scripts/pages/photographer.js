@@ -5,7 +5,10 @@ const dataID = parseInt(urlParams.get('id'));
 const sortSelect = document.getElementById('sortSelect');
 
 let photographerMedias = [],
-    photographerName = '';
+    photographerName = '',
+    logo = document.querySelector('.logo'),
+    contactButton = document.querySelector('.contact_button'),
+    input = document.querySelector('.input');
 currentCarouselIndex = 0;
 totalLikes = 0;
 photographerPrice = 0;
@@ -77,7 +80,7 @@ function Media(title, type, like, date, price) {
         const extension = this.type.split(".");
         switch (extension[1]) {
             case "mp4":
-                return `<video width="320" height="240" controls src="assets/medias/${photographerName}/${this.type}" 
+                return `<video width="320" height="240" src="assets/medias/${photographerName}/${this.type}" 
                 type="video/${extension[1]}" class="vid_media" alt="${this.title}" aria-label="${this.title}" tabindex="0">`;
             default:
                 return `<img src="assets/medias/${photographerName}/${this.type}" class="img_media" alt="${this.title}" aria-label="${this.title}" tabindex="0">`;
@@ -242,11 +245,22 @@ function carouselInit() {
         });
 
         function init() {
-            var imgMedias = document.querySelectorAll('.img_media')
-            var vidMedias = document.querySelectorAll('.vid_media')
+            let imgMedias = document.querySelectorAll('.img_media'),
+                vidMedias = document.querySelectorAll('.vid_media'),
+                likeButtons = document.querySelectorAll('.like_button');
+
+                likeButtons.forEach(function(elem){
+                    elem.setAttribute("tabindex",-1)
+                })
+
+            logo.setAttribute("tabindex",-1)
+            contactButton.setAttribute("tabindex",-1)
+            input.setAttribute("tabindex",-1)
+
             imgMedias.forEach(function (elem) {
                 elem.setAttribute("tabindex", "-1");
             })
+            console.log(imgMedias)
             vidMedias.forEach(function (elem) {
                 elem.setAttribute("tabindex", "-1");
             })
@@ -289,7 +303,7 @@ function carouselInit() {
                 let x = `<i id="close" class="fa-solid fa-xmark" tabindex="0"></i>`;
                 let previous = `<i id="previous" class="fa-solid fa-arrow-left" tabindex="0"></i>`;
                 let next = `<i  id="next" class="fa-solid fa-arrow-right" tabindex="0"></i>`;
-                modal.innerHTML = getUrlCode();
+                modal.innerHTML = `<div class="modal_media_container">${getUrlCode()}</div>`
                 if (photographerMedias[indexOf - 1] != undefined) {
                     modal.innerHTML += previous;
                 }
@@ -345,6 +359,15 @@ function carouselInit() {
 
                 function closeHandler() {
                     modal.style.display = "none";
+                    const likeButtons = document.querySelectorAll('.like_button')
+                    likeButtons.forEach(function(elem){
+                        elem.setAttribute("tabindex",0)
+                    })
+                    console.log(likeButtons)
+                    let closeButton = document.getElementById('closeModal');
+                    logo.setAttribute("tabindex",0)
+                    contactButton.setAttribute("tabindex",0)
+                    input.setAttribute("tabindex",0)
                     imgMedias.forEach(function (elem) {
                         elem.setAttribute("tabindex", "0");
                     })

@@ -2,16 +2,16 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const dataID = parseInt(urlParams.get('id'));
+
 const sortSelect = document.getElementById('sortSelect');
 
 let photographerMedias = [],
     photographerName = '',
     logo = document.querySelector('.logo'),
     contactButton = document.querySelector('.contact_button'),
-    input = document.querySelector('.input');
-currentCarouselIndex = 0;
-totalLikes = 0;
-photographerPrice = 0;
+    input = document.querySelector('.input'),
+    totalLikes = 0,
+    photographerPrice = 0;
 
 const mediaSection = document.querySelector('.medias_section'),
     cta = document.getElementById('cta');
@@ -19,8 +19,8 @@ const mediaSection = document.querySelector('.medias_section'),
 async function getPhotographers() {
     const response = await fetch('data/photographers.json'),
         data = await response.json();
-    photographers = data.photographers
-    media = data.media
+    let photographers = data.photographers
+    let media = data.media
     return ({
         photographers: [...photographers],
         media: [...media]
@@ -47,14 +47,15 @@ async function getPhotographerMedias() {
 //display photographer information
 getPhotographerInfo().then((photographer) => {
     displayData(photographer);
+    return photographer
 });
 
 function displayData(data) {
     let nameSplitter = data.name.split(" ");
     photographerName = nameSplitter[0];
     const section = document.querySelector(".photograph-info"),
-        article = document.createElement("article")
-    photoPh = document.querySelector(".photograph-picture");
+          article = document.createElement("article"),
+          photoPh = document.querySelector(".photograph-picture");
     article.innerHTML = `
           <h1>${data.name}</h1>
           <h2>${data.city}, ${data.country}</h2>
@@ -89,18 +90,18 @@ function Media(title, type, like, date, price) {
 }
 
 function parse_media(medias) {
-    photographerMedias = [],
-    index = -1;
-    totalLikes = 0;
+    photographerMedias = [];
+        let index = -1;
+        totalLikes = 0;
     // Factory product
     medias.forEach(function (media) {
         index++
-        mediaObject = new Media(
-            media.title,
-            media.image == undefined ? media.video : media.image,
-            media.likes,
-            media.date,
-            media.price
+        let mediaObject = new Media(
+                media.title,
+                media.image == undefined ? media.video : media.image,
+                media.likes,
+                media.date,
+                media.price
         );
         totalLikes = totalLikes + parseInt(mediaObject.like);
 
@@ -159,16 +160,17 @@ sortSelect.addEventListener("change", function () {
 
 function ctaDisplay() {
     cta.innerHTML = "";
-    div = document.createElement("div");
-    div.setAttribute("class", "photographer_price")
-    div.innerHTML = `${photographerPrice}€ / jour</i>`
-    var totalLikeHTML = `<div class="total_likes">${totalLikes} <i class="fa-solid fa-heart"></div>`
-    cta.appendChild(div)
+    let div = document.createElement("div");
+    div.setAttribute("class", "photographer_price");
+    div.innerHTML = `${photographerPrice}€ / jour</i>`;
+    var totalLikeHTML = `<div class="total_likes">${totalLikes} <i class="fa-solid fa-heart"></div>`;
+    cta.appendChild(div);
     cta.innerHTML += totalLikeHTML;
 }
 
 function like() {
-    let like_buttons = document.querySelectorAll('.like_button')
+    let like_buttons = document.querySelectorAll('.like_button');
+    
     like_buttons.forEach(function (e) {
 
         e.addEventListener("click", function () {
@@ -177,8 +179,8 @@ function like() {
             //const response = await fetch('data/photographers.json'),
                   //data = await response.json();
 
-            indexOf = photographerMedias.findIndex(x => x.id == like_button_id)
-            console.log(indexOf);
+            let indexOf = photographerMedias.findIndex(x => x.id == like_button_id)
+
 
             if (this.classList.contains('active')) {
                 this.classList.remove('active');
@@ -216,7 +218,34 @@ function like() {
                    // .then(response => response.json())
                    //.then(json => console.log(json))
                     //console.log(data);
-            };
+            }
+        })
+
+        e.addEventListener("keypress", function (event) {
+            // Vérifiez si la touche appuyée est "Entrée" (code 13)
+            if (event.keyCode === 13) {
+                let like_button_id = this.getAttribute("data-id");
+                //const response = await fetch('data/photographers.json'),
+                      //data = await response.json();
+    
+                let indexOf = photographerMedias.findIndex(x => x.id == like_button_id)
+    
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                    photographerMedias[indexOf].likes = photographerMedias[indexOf].likes - 1;
+                    let likes = document.querySelectorAll('.like')
+                    likes[indexOf].innerHTML = photographerMedias[indexOf].likes
+                    totalLikes --
+                    ctaDisplay()
+                } else {
+                    this.classList.add('active')
+                    photographerMedias[indexOf].likes = photographerMedias[indexOf].likes + 1;
+                    let likes = document.querySelectorAll('.like')
+                    likes[indexOf].innerHTML = photographerMedias[indexOf].likes
+                    totalLikes ++
+                    ctaDisplay()
+                }
+            }
         })
     })
 }
@@ -260,7 +289,6 @@ function carouselInit() {
             imgMedias.forEach(function (elem) {
                 elem.setAttribute("tabindex", "-1");
             })
-            console.log(imgMedias)
             vidMedias.forEach(function (elem) {
                 elem.setAttribute("tabindex", "-1");
             })
@@ -324,7 +352,7 @@ function carouselInit() {
                             previousHandler();
                         }
                     })
-                    prevArg = "previous"
+                    let prevArg = "previous"
 
                     function previousHandler() {
                         previousMedia = photographerMedias[indexOf - 1].id
@@ -340,7 +368,7 @@ function carouselInit() {
                             nextHandler();
                         }
                     })
-                    nextArg = "next"
+                    let nextArg = "next"
 
                     function nextHandler() {
                         nextMedia = photographerMedias[indexOf + 1].id
@@ -348,7 +376,7 @@ function carouselInit() {
                     }
                 }
                 // fermer
-                close = document.getElementById("close")
+                let close = document.getElementById("close")
                 close.addEventListener("click", closeHandler)
                 close.addEventListener("keypress", function (event) {
                     // Vérifiez si la touche appuyée est "Entrée" (code 13)
@@ -363,8 +391,6 @@ function carouselInit() {
                     likeButtons.forEach(function(elem){
                         elem.setAttribute("tabindex",0)
                     })
-                    console.log(likeButtons)
-                    let closeButton = document.getElementById('closeModal');
                     logo.setAttribute("tabindex",0)
                     contactButton.setAttribute("tabindex",0)
                     input.setAttribute("tabindex",0)

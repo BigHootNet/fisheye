@@ -40,10 +40,17 @@
     display: none;
 }
 
-.contact_button {
-    position: absolute;
-    top:50%;
-    left:50%;
+#contact_modal .modal label{
+    font-size: 20px;
+}
+
+#contact_modal .modal h3 {
+    width: 100%;
+}
+
+
+
+.contact_button, .submit_button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -54,6 +61,11 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.contact_button {
+    position: absolute;
+    left:45%;
 }
 
 .fa-heart {
@@ -69,24 +81,38 @@
 }
 
 .modal {
+    position: absolute;
+    left: 35%;
+    top: 10%;
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    width: 25%;
+    z-index: 9999;
 }
 
+
 .modal header {
+    display: flex;
     justify-content: space-between;
     width: 100%;
+    flex-wrap: wrap;
+    height: 15%;
 }
 
 .modal header img {
     cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
 }
 
 .modal header h2 {
@@ -119,6 +145,18 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    width: 100%;
+}
+
+.modal_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    z-index: 9998;
 }
 
 section {
@@ -129,6 +167,26 @@ section {
     align-items: center;
     margin: 0 100px;
 }
+
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 0.9em;
+    color: #e54858;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 0.3;
+    transition: 0.3s;
+  }
+  
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+  }
+  
+  .formData[data-error-visible="true"] .text-control {
+    border: 2px solid #e54858;
+  }
 
 .medias_section {
     display:flex;

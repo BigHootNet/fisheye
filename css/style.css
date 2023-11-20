@@ -57,3 +57,14 @@ article img {
     clip-path: circle(50%);
     object-fit: cover;
 }
+
+#mail_success {
+    display: none;
+    position: sticky;
+    bottom: 0;
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 10px;
+
+}

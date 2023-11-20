@@ -24,18 +24,32 @@
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi</h2>
+        <h3>Contactez-moi</h2>
+        <h3 id="modal_id_name_holder"></h2>
         <img src="assets/icons/close.svg" onclick="closeModal()"  onkeypress="closeModal()" alt="fermer"  id="closeModal"/>
       </header>
-      <form>
-        <div>
+      <form id="main-form" onsubmit="return false;">
+        <div class="formData">
           <label for="name">Prénom</label>
           <input type="text" id="name" />
         </div>
-        <button class="contact_button" role="button">Envoyer</button>
+        <div class="formData">
+          <label for="lastname">Nom</label>
+          <input type="text" id="lastname" />
+        </div>
+        <div class="formData">
+          <label for="email">Mail</label>
+          <input type="text" id="email" />
+        </div>
+        <div class="formData">
+          <label for="msg">Votre message</label>
+          <input type="text" id="msg" />
+        </div>
+        <button class="submit_button" role="button">Envoyer</button>
       </form>
     </div>
   </div>
+  <div class="modal_bg"></div>
   <section>
     <div class="input">
       <label for="sortSelect">Trier par :</label>
@@ -47,9 +61,12 @@
     </div>
     <div class="medias_section"></div>
   </section>
+  <div id="mail_success">
+    Votre message a bien été envoyé !
+  </div>
   <div id="cta"></div>
   <div id="modal"></div>
   <script src="/scripts/pages/photographer.js"></script>
-  <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/utils/contactForm.js" defer></script>
 </body>
 </html>

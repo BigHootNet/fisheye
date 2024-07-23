@@ -131,7 +131,7 @@ function parse_media(medias) {
                 <h3>${mediaObject.title}</h3>
                 <div class="media_like_holder">
                     <h4 class="like">${mediaObject.like}</h4>
-                    <i class="fa-solid fa-heart like_button" data-id=${medias[index].id} tabindex="0" aria-label="Like"></i>
+                    <em class="fa-solid fa-heart like_button" data-id=${medias[index].id} tabindex="0" aria-label="Like"></em>
                 </div>
             </div>
         </div>
@@ -171,8 +171,8 @@ function ctaDisplay() {
     cta.innerHTML = "";
     let div = document.createElement("div");
     div.setAttribute("class", "photographer_price");
-    div.innerHTML = `${photographerPrice}€ / jour</i>`;
-    var totalLikeHTML = `<div class="total_likes">${totalLikes} <i class="fa-solid fa-heart" aria-label="Like"></div>`;
+    div.innerHTML = `${photographerPrice}€ / jour</em>`;
+    var totalLikeHTML = `<div class="total_likes">${totalLikes} <em class="fa-solid fa-heart" aria-label="Like"></div>`;
     cta.appendChild(div);
     cta.innerHTML += totalLikeHTML;
 }
@@ -301,9 +301,9 @@ function carouselInit() {
 
                 // Construction de la modal
                 modal.innerHTML = "";
-                let x = `<i id="close" class="fa-solid fa-xmark" tabindex="0" aria-label="close"></i>`;
-                let previous = `<i id="previous" class="fa-solid fa-arrow-left" tabindex="0" aria-label="previous"></i>`;
-                let next = `<i  id="next" class="fa-solid fa-arrow-right" tabindex="0" aria-label="next"></i>`;
+                let x = `<em id="close" class="fa-solid fa-xmark" tabindex="0" aria-label="close"></em>`;
+                let previous = `<em id="previous" class="fa-solid fa-arrow-left" tabindex="0" aria-label="previous"></em>`;
+                let next = `<em  id="next" class="fa-solid fa-arrow-right" tabindex="0" aria-label="next"></em>`;
                 modal.innerHTML = `<div class="modal_media_container">${getUrlCode()}</div>`;
                 
                 if (photographerMedias[indexOf - 1] != undefined) {

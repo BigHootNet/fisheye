@@ -176,8 +176,6 @@ function like() {
         e.addEventListener("click", function () {
 
             let like_button_id = this.getAttribute("data-id");
-            //const response = await fetch('data/photographers.json'),
-                  //data = await response.json();
 
             let indexOf = photographerMedias.findIndex(x => x.id == like_button_id)
 
@@ -189,17 +187,6 @@ function like() {
                 likes[indexOf].innerHTML = photographerMedias[indexOf].likes
                 totalLikes --
                 ctaDisplay()
-                //fetch('data/photographers.json', {
-                        //method: "PUT",
-                        //body: JSON.stringify(data),
-                        //headers: {
-                            //'Content-type': 'application/json'
-                        //}
-                    //})
-                    //.then(response => response.json())
-                    //.then(json => console.log(json))
-                    //console.log(data);
-
 
             } else {
                 this.classList.add('active')
@@ -208,16 +195,6 @@ function like() {
                 likes[indexOf].innerHTML = photographerMedias[indexOf].likes
                 totalLikes ++
                 ctaDisplay()
-                //fetch('data/photographers.json', {
-                       // method: "PUT",
-                        //body: JSON.stringify(data),
-                        //headers: {
-                           // 'Content-type': 'application/json'
-                       // }
-                  //  })
-                   // .then(response => response.json())
-                   //.then(json => console.log(json))
-                    //console.log(data);
             }
         })
 
@@ -225,8 +202,6 @@ function like() {
             // Vérifiez si la touche appuyée est "Entrée" (code 13)
             if (event.keyCode === 13) {
                 let like_button_id = this.getAttribute("data-id");
-                //const response = await fetch('data/photographers.json'),
-                      //data = await response.json();
     
                 let indexOf = photographerMedias.findIndex(x => x.id == like_button_id)
     

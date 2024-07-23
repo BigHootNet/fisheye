@@ -124,7 +124,7 @@ function parse_media(medias) {
                 <h3>${mediaObject.title}</h3>
                 <div class="media_like_holder">
                     <h4 class="like">${mediaObject.like}</h4>
-                    <i class="fa-solid fa-heart like_button" data-id=${medias[index].id} tabindex="0"></i>
+                    <i class="fa-solid fa-heart like_button" data-id=${medias[index].id} tabindex="0" aria-label="Like"></i>
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@ function ctaDisplay() {
     let div = document.createElement("div");
     div.setAttribute("class", "photographer_price");
     div.innerHTML = `${photographerPrice}€ / jour</i>`;
-    var totalLikeHTML = `<div class="total_likes">${totalLikes} <i class="fa-solid fa-heart"></div>`;
+    var totalLikeHTML = `<div class="total_likes">${totalLikes} <i class="fa-solid fa-heart" aria-label="Like"></div>`;
     cta.appendChild(div);
     cta.innerHTML += totalLikeHTML;
 }
@@ -328,9 +328,9 @@ function carouselInit() {
                 }
                 // modal builder
                 modal.innerHTML = ""
-                let x = `<i id="close" class="fa-solid fa-xmark" tabindex="0"></i>`;
-                let previous = `<i id="previous" class="fa-solid fa-arrow-left" tabindex="0"></i>`;
-                let next = `<i  id="next" class="fa-solid fa-arrow-right" tabindex="0"></i>`;
+                let x = `<i id="close" class="fa-solid fa-xmark" tabindex="0" aria-label="close"></i>`;
+                let previous = `<i id="previous" class="fa-solid fa-arrow-left" tabindex="0" aria-label="previous"></i>`;
+                let next = `<i  id="next" class="fa-solid fa-arrow-right" tabindex="0" aria-label="next"></i>`;
                 modal.innerHTML = `<div class="modal_media_container">${getUrlCode()}</div>`
                 if (photographerMedias[indexOf - 1] != undefined) {
                     modal.innerHTML += previous;
@@ -403,7 +403,7 @@ function carouselInit() {
                     document.getElementsByTagName('html')[0].style.overflow = "scroll";
                 }
 
-                // Check if end of carousel, then focus right or left
+                // Check si c'est la fin du carousel, adapte le bouton gauche/droite
                 if (previous !== null && nextPrevHandler == "previous") {
                     previous.focus();
                 } else if (next !== null && nextPrevHandler == "next") {

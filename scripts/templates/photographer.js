@@ -9,6 +9,8 @@ function photographerTemplate(data) {
         const img = document.createElement( 'img' );
         a.setAttribute('href', 'photographer.html?id='+id);
         img.setAttribute('src', picture);
+        img.setAttribute('alt', name);
+        img.setAttribute('aria-label', name);
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
         a.appendChild(article);
